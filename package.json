@@ -1,6 +1,6 @@
 {
   "name": "Feelings",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Progetto per il social Feelings.",
   "main": "src/app.js",
   "scripts": {

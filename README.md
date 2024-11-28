@@ -1,9 +1,8 @@
 Progetto d’Esame di Basi di Dati
 
 Anno Accademico: 2024/2025
-Professore: Alfredo Pulvirenti
 Università degli Studi di Catania - Dipartimento di Matematica e Informatica
-Studente: Gabriele Ciadamidaro
+
 
 
 Descrizione del progetto

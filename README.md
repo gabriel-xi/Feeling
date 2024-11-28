@@ -165,3 +165,9 @@ WHERE id = ? AND id_user = ?;
 
 Ruolo:
 Garantisce che solo l’autore di un post possa eliminarlo.
+
+
+EER del Database:
+![Diary](https://github.com/user-attachments/assets/1cb0efc8-0131-4456-9a5e-cccdbcf7a5d0)
+
+

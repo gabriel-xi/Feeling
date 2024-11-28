@@ -4,7 +4,7 @@ Anno Accademico: 2024/2025
 Professore: Alfredo Pulvirenti
 Università degli Studi di Catania - Dipartimento di Matematica e Informatica
 Studente: Gabriele Ciadamidaro
-Matricola: 1000001027
+
 
 Descrizione del progetto
 

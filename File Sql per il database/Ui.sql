@@ -1,41 +1,46 @@
-USE Diary;
-
-DROP TABLE IF EXISTS POST;
-DROP TABLE IF EXISTS Chats;
+USE (nome_database);
 
 -- Creazione della tabella Post
-CREATE TABLE IF NOT EXISTS Post(
-	id INT AUTO_INCREMENT,
-    username VARCHAR(255),
-	sentimento VARCHAR(255) NOT NULL,
-	note VARCHAR(255),
-    reazioni VARCHAR(255),
-    commenti VARCHAR(255),
-    id_user  INT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_user) REFERENCES Users(id) ON DELETE CASCADE,
-    FOREIGN KEY(username) REFERENCES Username(username) ON DELETE CASCADE
-);
--- Creazione della tabella Chats
-CREATE TABLE IF NOT EXISTS Chats(
-	id INT,
-    nome VARCHAR(255),
-    #stato INT NOT NULL,
-    #id_messages INT AUTO_INCREMENT,
-    #messages INT NOT NULL,
-    id_user VARCHAR(255),
-    PRIMARY KEY(id_user),
-    FOREIGN KEY (nome) REFERENCES Users(nome),
-    FOREIGN KEY (id_user) REFERENCES Users(id_user)
+CREATE TABLE IF NOT EXISTS Post (
+    id INT AUTO_INCREMENT, -- Id univoco del post
+    id_user INT NOT NULL, -- Id dell'utente
+    sentimento VARCHAR(255) NOT NULL, -- Prima nota
+    note VARCHAR(255), -- Seconda Nota
+    reazioni INT DEFAULT 0, -- Reazioni sul post
+    commenti VARCHAR(255), -- Commenti sul post
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e orario di creazione del post
+
+    PRIMARY KEY(id),
+    FOREIGN KEY (id_user) REFERENCES Users(id) ON DELETE CASCADE
 );
 
+
+CREATE TABLE IF NOT EXISTS FriendRequests (
+    id INT AUTO_INCREMENT, -- Numero della richiesta
+    sender_id INT NOT NULL, -- Mandante
+    receiver_id INT NOT NULL, -- Ricevente
+    status ENUM('pending', 'accepted', 'declined') DEFAULT 'pending', -- Stato della richiesta
+    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data di inoltro
+    
+    PRIMARY KEY(id),
+    FOREIGN KEY (sender_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES Users(id) ON DELETE CASCADE
+);
+
+-- Crea la tabella Friends
 CREATE TABLE IF NOT EXISTS Friends (
-    id INT,                 -- id dell'utente che aggiunge l'amico
-    amico_id INT,           -- id dell'amico
-    nome_amico VARCHAR(255), -- nome dell'amico
-    cognome_amico VARCHAR(255), -- cognome dell'amico
-    status VARCHAR(50),      -- stato dell'amicizia (opzionale)
-    PRIMARY KEY (id, amico_id),  -- La combinazione id/amico_id è univoca
-    FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE,
-    FOREIGN KEY (amico_id) REFERENCES Users(id) ON DELETE CASCADE
+    user_id INT NOT NULL, -- Id dell'utentete
+    friend_id INT NOT NULL, -- Id dell'amico
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id,friend_id),
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (friend_id) REFERENCES Users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY, -- ID univoco per ciascuna notifica
+    user_id INT NOT NULL,              -- ID dell'utente che riceve la notifica
+    content VARCHAR(255) NOT NULL,     -- Contenuto del messaggio di notifica
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e ora di creazione della notifica
+    FOREIGN KEY (user_id) REFERENCES Users(id) -- Assicurati che user_id sia una chiave esterna che riferisce alla tabella degli utenti
 );

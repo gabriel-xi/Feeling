@@ -178,9 +178,9 @@ N.B
 * Installato Sql sulla propria macchina;
   
 * Il file package.json: 
-  Comando utilizzato per la creazione: "npm init" o "npm init -y";
+  Comando utilizzato per la creazione nella Directory del progetto: "npm init" o "npm init -y";
 
-* Installare dei pacchetti necessari per il server in Javascript:
+* Installare dei pacchetti necessari per il server in Javascrip nella Directory del progettot:
 * Comando utilizzato per l'installazione: "npm install express" per lo sviluppo "npm install nodemon --save-dev";
 
 * Un alternativa a "npm" è "yarn"

@@ -1,4 +1,4 @@
-USE Diary;
+USE "Nome Database";
 
 -- Creazione della tabella Post
 CREATE TABLE IF NOT EXISTS Post (
@@ -37,10 +37,4 @@ CREATE TABLE IF NOT EXISTS Friends (
     FOREIGN KEY (friend_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Notifications (
-    id INT AUTO_INCREMENT PRIMARY KEY, -- ID univoco per ciascuna notifica
-    user_id INT NOT NULL,              -- ID dell'utente che riceve la notifica
-    content VARCHAR(255) NOT NULL,     -- Contenuto del messaggio di notifica
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data e ora di creazione della notifica
-    FOREIGN KEY (user_id) REFERENCES Users(id) -- Assicurati che user_id sia una chiave esterna che riferisce alla tabella degli utenti
-);
+

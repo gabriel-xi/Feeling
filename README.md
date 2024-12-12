@@ -174,13 +174,14 @@ N.B
 
 * Per eseguire i vari moduli bisogna avere:
 
-* Installato Java sulla propria macchina, link per il download: "https://www.java.com/it/download/manual.jsp"
+* Installato Java sulla propria macchina, link per il download: "https://www.java.com/it/download/manual.jsp";
+* Installato Sql sulla propria macchina;
   
 * Il file package.json: 
-  Comando utilizzato per la creazione: "npm init" o "npm init -y"
+  Comando utilizzato per la creazione: "npm init" o "npm init -y";
 
-* Installare dei pacchetti necessari per il server in Javascript
-* Comando utilizzato per l'installazione: "npm install express" per lo sviluppo "npm install nodemon --save-dev"
+* Installare dei pacchetti necessari per il server in Javascript:
+* Comando utilizzato per l'installazione: "npm install express" per lo sviluppo "npm install nodemon --save-dev";
 
 * Un alternativa a "npm" è "yarn"
 

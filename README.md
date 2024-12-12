@@ -1,18 +1,18 @@
 
 <img width="1250" alt="Logo+UniCT" src="https://github.com/user-attachments/assets/1543d6ac-f394-406b-a874-2c651273e2dd" />
 
-Progetto d’Esame di Basi di Dati
+**Progetto d’Esame di Basi di Dati**
 
-Anno Accademico: 2024/2025
-Università degli Studi di Catania - Dipartimento di Matematica e Informatica
+**Anno Accademico: 2024/2025**
+**Università degli Studi di Catania - Dipartimento di Matematica e Informatica**
 
 
 
-Descrizione del progetto
+**Descrizione del progetto**
 
 Il progetto consiste nella realizzazione di un Social Network con funzionalità di base. L’obiettivo principale è dimostrare l’integrazione tra le componenti di frontend, backend e database, per fornire un’applicazione che permette agli utenti finali di interagire con i dati attraverso operazioni CRUD (Create, Read, Update, Delete).
 
-Tecnologie utilizzate
+**Tecnologie utilizzate**
 
 	•	Frontend:
 	•	HTML per la struttura delle pagine web.
@@ -24,7 +24,7 @@ Tecnologie utilizzate
 	•	Utilizzo di un DBMS (Database Management System) progettato in MySQL Workbench.
 	•	Comunicazione con il database tramite query SQL integrate nel backend.
 
- Funzionalità principali
+ **Funzionalità principali**
 
 	1.	Registrazione e Login degli utenti:
         		Gli utenti possono creare un account o accedere a uno esistente tramite credenziali salvate nel database.
@@ -44,9 +44,9 @@ Tecnologie utilizzate
 
 
 
-Query Utilizzate nel Progetto:
+**Query Utilizzate nel Progetto:**
 
-1. Registrazione degli Utenti:
+**1. Registrazione degli Utenti:**
 
 Descrizione:
 Questa query viene utilizzata per registrare un nuovo utente nel sistema. I dati inseriti dall’utente (username, nome, cognome, email, password) vengono validati e quindi salvati nel database.
@@ -66,7 +66,7 @@ Ruolo:
 Permette di creare nuovi utenti e aggiungerli alla tabella Users.
 
 
-2. Login degli Utenti:
+**2. Login degli Utenti:**
 
 -E-mail
 Descrizione:
@@ -85,7 +85,7 @@ Parametri:
 Ruolo:
 Questa funzionalità autentica gli utenti verificando sia l’esistenza dell’email che la validità della password. La sicurezza è garantita dall’utilizzo di password hashate e dal confronto lato server.
 
-3. Creazione di Post
+**3. Creazione di Post**
 
 Descrizione:
 Gli utenti possono creare post, specificando un sentimento e una nota opzionale. La query salva il contenuto nella tabella Post.
@@ -103,7 +103,7 @@ Parametri:
 Ruolo:
 Permette agli utenti di pubblicare nuovi post nel Social Network.
 
-4. Visualizzazione dei Post
+**4. Visualizzazione dei Post**
 
 Descrizione:
 Recupera i post di un utente e quelli dei suoi amici. La query esegue una join tra le tabelle Post, Users, e Friends.
@@ -127,7 +127,7 @@ ORDER BY Post.created_at DESC;
 Ruolo:
 Consente di visualizzare i post pubblicati da un utente e dai suoi amici.
 
-5. Gestione delle Amicizie
+**5. Gestione delle Amicizie**
 
 Descrizione:
 Crea una richiesta di amicizia tra due utenti.
@@ -156,7 +156,7 @@ VALUES (?, ?), (?, ?);
 Ruolo:
 Gestisce l’accettazione e la creazione di una relazione di amicizia.
 
-6. Eliminazione di un Post
+**6. Eliminazione di un Post**
 
 Descrizione:
 Permette a un utente di eliminare un post esistente, verificando che il post appartenga a quell’utente.
@@ -170,7 +170,7 @@ Garantisce che solo l’autore di un post possa eliminarlo.
 
 --------------------------------------------------------------------------------
 
-N.B
+**N.B**
 
 * Macchina utilizzata Macbook Air M1
 * Piattaforma utilizzata macOS Sequoia (Versione 15.1) 

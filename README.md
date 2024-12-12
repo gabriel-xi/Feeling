@@ -24,20 +24,20 @@ Tecnologie utilizzate
  Funzionalità principali
 
 	1.	Registrazione e Login degli utenti:
-        Gli utenti possono creare un account o accedere a uno esistente tramite credenziali salvate nel database.
+        		Gli utenti possono creare un account o accedere a uno esistente tramite credenziali salvate nel database.
 	2.	Creazione, modifica e cancellazione di post:
-        Gli utenti possono pubblicare contenuti, modificarli o eliminarli.
+       			 Gli utenti possono pubblicare contenuti, modificarli o eliminarli.
 	3.	Gestione di profili utente:
-        Ogni utente ha un profilo personalizzabile, con dati memorizzati nel database.
+        		 Ogni utente ha un profilo personalizzabile, con dati memorizzati nel database.
 	4.	Interazione tra utenti:
-	      •	Possibilità di aggiungere commenti ai post.
-	      •	Sistema di notifiche basilare (opzionale).
+	      		 Possibilità di aggiungere commenti ai post.
+	     		 Sistema di notifiche basilare (opzionale).
 	5.	Connessione al database:
-      L’applicazione sfrutta query SQL per:
-	      •	Recuperare dati (lettura).
-	      •	Inserire nuovi record (creazione).
-	      •	Aggiornare dati esistenti (modifica).
-	      •	Rimuovere record (cancellazione).
+      			 L’applicazione sfrutta query SQL per:
+	     			 • Recuperare dati (lettura).
+	     			 • Inserire nuovi record (creazione).
+	     			 • Aggiornare dati esistenti (modifica).
+	      			 • Rimuovere record (cancellazione).
 
 
 
@@ -164,4 +164,25 @@ WHERE id = ? AND id_user = ?;
 
 Ruolo:
 Garantisce che solo l’autore di un post possa eliminarlo.
+
+--------------------------------------------------------------------------------
+
+N.B
+
+* Macchina utilizzata Macbook Air M1
+* Piattaforma utilizzata macOS Sequoia (Versione 15.1) 
+
+* Per eseguire i vari moduli bisogna avere:
+
+* Installato Java sulla propria macchina, link per il download: "https://www.java.com/it/download/manual.jsp"
+  
+* Il file package.json: 
+  Comando utilizzato per la creazione: "npm init" o "npm init -y"
+
+* Installare dei pacchetti necessari per il server in Javascript
+* Comando utilizzato per l'installazione: "npm install express" per lo sviluppo "npm install nodemon --save-dev"
+
+* Un alternativa a "npm" è "yarn"
+
+
 

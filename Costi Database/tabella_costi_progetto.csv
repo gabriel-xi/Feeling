@@ -1,0 +1,5 @@
+File,Operazione,Accessi in Lettura (L),Accessi in Scrittura (S),Note
+posts.js,"Creazione, lettura e cancellazione dei post","2L per creazione (Users, Post), 5L per lettura (Post, Users, Friends)","1S per creazione post (Post), 1S per eliminazione",Creazione e cancellazione dei post con controllo dell'utente
+profile.js,Gestione del profilo utente,"3L per lettura dei post utente (Post, Users)",1S per creazione post (Post),Lettura dei post con verifica proprietà utente
+friends.js,Gestione richieste di amicizia e lista amici,"4L per richieste di amicizia (Users, FriendRequests)","2S per invio richiesta (FriendRequests, Notifications)",Invio richieste e gestione notifiche
+auth.js,Registrazione e login utente,2L per login (Users),1S per registrazione (Users),Verifica credenziali e creazione nuovo utente

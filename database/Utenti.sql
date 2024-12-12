@@ -1,4 +1,4 @@
-USE Diary;
+USE "Nome Database";
 
 -- Creazione della tabella Users_type
 CREATE TABLE IF NOT EXISTS Users_type (

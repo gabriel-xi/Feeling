@@ -1,0 +1,392 @@
+/* Generali */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #6200ea;
+    outline: none;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #3700b3;
+}
+
+#message, #error-message {
+    color: red;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Header */
+header {
+    background-color: #6200ea;
+    padding: 15px 20px;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: text-decoration 0.3s;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+}
+
+/* Post e Feed */
+#postsContainer .post {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+#postsContainer .post h3 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    color: #6200ea;
+}
+
+#postsContainer .post p {
+    margin: 10px 0;
+}
+
+#postsContainer .post img {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#postsContainer .reactButton {
+    background: #6200ea;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    transition: background-color 0.3s;
+}
+
+#postsContainer .reactButton:hover {
+    background-color: #3700b3;
+}
+
+/* Chat */
+#chatsContainer {
+    list-style: none;
+    padding: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#chatsContainer li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#chatsContainer li:hover {
+    background-color: #f0f0f0;
+}
+
+#messagesContainer {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#messagesContainer div {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-size: 0.9rem;
+}
+
+#messagesContainer div.sender {
+    background-color: #cce5ff;
+    text-align: right;
+}
+
+/* Moduli */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form input, form textarea, form button {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #6200ea;
+    outline: none;
+}
+
+form button {
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #3700b3;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f2f5;
+    font-size: 0.9rem;
+}
+/* Effetto arcobaleno per i pulsanti durante il caricamento */
+@keyframes rainbow-border {
+    0% { border-color: red; }
+    16% { border-color: orange; }
+    32% { border-color: yellow; }
+    48% { border-color: green; }
+    64% { border-color: blue; }
+    80% { border-color: indigo; }
+    100% { border-color: violet; }
+}
+
+/* Pulsante con effetto arcobaleno */
+button.loading {
+    border: 4px solid transparent;
+    animation: rainbow-border 2s infinite linear;
+    transition: box-shadow 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Ombreggiatura dinamica */
+.dynamic-shadow {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Modifiche per il tema accogliente */
+body {
+    background: linear-gradient(to bottom, #fdeff9, #f0f2f5);
+    color: #4a4a4a;
+}
+
+.form-box {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #f5ced6;
+}
+
+.input-group input {
+    border: 1px solid #f5ced6;
+}
+
+.input-group input:focus {
+    border-color: #fa709a;
+    box-shadow: 0 0 5px rgba(250, 112, 154, 0.5);
+}
+
+.btn {
+    background: linear-gradient(to right, #fa709a, #fee140);
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(250, 112, 154, 0.4);
+}
+
+.btn:hover {
+    background: linear-gradient(to right, #fee140, #fa709a);
+}
+
+p a {
+    color: #fa709a;
+}
+
+p a:hover {
+    text-decoration: underline;
+    color: #ff567e;
+}
+
+h2 {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    color: #fa709a;
+    text-align: center;
+}
+
+/* Aggiunta di sfondo dinamico */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://via.placeholder.com/1500x1000/FAE0E4/FFFFFF?text=Empathy') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+
+/* Instagram-like grid layout */
+.container-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    color: #fa709a;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* Buttons inside cards */
+.card button {
+    background: linear-gradient(to right, #fa709a, #fee140);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.card button:hover {
+    background: linear-gradient(to right, #fee140, #fa709a);
+}
+
+#error-message {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: red;
+}
+#message-box {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}

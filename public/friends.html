@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Amici - Feelings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(to right, rgb(250, 112, 154), rgb(254, 225, 64));
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .center {
+            flex: 2;
+        }
+
+        .container {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            background: linear-gradient(to right, #fa709a, #fee140); /* Gradiente */
+            -webkit-background-clip: text; /* Clip sfondo al testo */
+            -webkit-text-fill-color: transparent; /* Rende il testo trasparente */
+            font-weight: bold; /* Opzionale, per evidenziare */
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #fa709a, #fee140);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .container-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn.accept-btn {
+            background: #28a745;
+        }
+
+        .btn.reject-btn {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/home.html" class="logo">F</a>
+
+    </header>
+    <main>
+        <!-- Colonna sinistra: Richieste ricevute -->
+        <div class="column">
+            <div class="container">
+                <h2>Richieste Ricevute</h2>
+                <div id="friendRequestsContainer" class="container-grid"></div>
+            </div>
+        </div>
+
+        <!-- Colonna centrale: Invia richieste -->
+        <div class="center">
+            <div class="container">
+                <h2>Invia una Richiesta di Amicizia</h2>
+                <form id="friendRequestForm">
+                    <div class="input-group">
+                        <input type="text" name="username" placeholder="Nome utente" required>
+                    </div>
+                    <button type="submit" class="btn">Invia richiesta</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Colonna destra: Lista amici -->
+        <div class="column">
+            <div class="container">
+                <h2>Amici</h2>
+                <div id="friendsContainer" class="container-grid"></div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const friendRequestForm = document.getElementById('friendRequestForm');
+            const friendRequestsContainer = document.getElementById('friendRequestsContainer');
+            const friendsContainer = document.getElementById('friendsContainer');
+
+            // Carica richieste di amicizia
+            function loadFriendRequests() {
+                const userId = localStorage.getItem('user_id');
+                fetch(`/friends/requests/${userId}`)
+                    .then(response => response.json())
+                    .then(requests => {
+                        friendRequestsContainer.innerHTML = requests.map(request => `
+                            <div class="card">
+                                <h3>${request.senderUsername}</h3>
+                                <p>Ha inviato una richiesta di amicizia</p>
+                                <div>
+                                    <button class="btn accept-btn" data-id="${request.id}">Accetta</button>
+                                    <button class="btn reject-btn" data-id="${request.id}">Rifiuta</button>
+                                </div>
+                            </div>
+                        `).join('');
+
+                        document.querySelectorAll('.accept-btn').forEach(button => {
+                            button.addEventListener('click', () => handleRequest(button.dataset.id, true));
+                        });
+                        document.querySelectorAll('.reject-btn').forEach(button => {
+                            button.addEventListener('click', () => handleRequest(button.dataset.id, false));
+                        });
+                    });
+            }
+
+            // Carica amici
+            function loadFriends() {
+                const userId = localStorage.getItem('user_id');
+                fetch(`/friends/list/${userId}`)
+                    .then(response => response.json())
+                    .then(friends => {
+                        friendsContainer.innerHTML = friends.map(friend => `
+                            <div class="card">
+                                <h3>${friend.username}</h3>
+                                <p>Amico dal ${new Date(friend.friendSince).toLocaleDateString()}</p>
+                            </div>
+                        `).join('');
+                    });
+            }
+
+            // Accetta o rifiuta richieste
+            function handleRequest(requestId, accept) {
+    fetch(`/friends/respond`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+            requestId,  // ID della richiesta
+            accept      // Accettare o rifiutare
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            console.error('Errore nella gestione della richiesta:', data.error);
+            alert(`Errore: ${data.error}`);
+        } else {
+            alert(data.success);
+            loadFriendRequests(); // Aggiorna le richieste pendenti
+            loadFriends();        // Aggiorna la lista amici
+        }
+    })
+    .catch(err => {
+        console.error('Errore durante la gestione della richiesta:', err);
+        alert('Errore imprevisto durante la gestione della richiesta.');
+    });
+}
+
+            // Invio di una nuova richiesta di amicizia
+            friendRequestForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const username = this.username.value;
+                const senderId = localStorage.getItem('user_id');
+
+                fetch('/friends/request', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: JSON.stringify({
+                        sender_id: senderId,
+                        recipientUsername: username
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.success || data.error);
+                    this.reset();
+                    loadFriendRequests();
+                });
+            });
+
+            // Caricamento iniziale
+            loadFriendRequests();
+            loadFriends();
+        });
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user_id');
+            alert('Logout effettuato.');
+            window.location.href = '/login.html';
+        }
+    </script>
+</body>
+</html>

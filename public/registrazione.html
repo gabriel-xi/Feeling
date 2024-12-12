@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione - Feelings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h2>Unisciti a Feelings</h2>
+            <form id="registrazioneForm">
+                <div class="input-group">
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="nome" placeholder="Nome" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" name="cognome" placeholder="Cognome" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div id="message-box"></div>
+                <button type="submit" class="btn">Registrati</button>
+            </form>
+            <p>Hai già un account? <a href="/login.html">Accedi</a></p>
+        </div>
+    </div>
+
+    <script>
+    document.getElementById('registrazioneForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const messageBox = document.getElementById('message-box');
+
+    // Resetta i messaggi
+    messageBox.textContent = '';
+    messageBox.style.color = '';
+
+    fetch('/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username: formData.get('username'),
+            nome: formData.get('nome'),
+            cognome: formData.get('cognome'),
+            email: formData.get('email'),
+            password: formData.get('password')
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            messageBox.textContent = 'Registrazione completata con successo! Reindirizzamento in corso...';
+            messageBox.style.color = 'green';
+            setTimeout(() => {
+                window.location.href = '/login.html';
+            }, 2000);
+        } else {
+            messageBox.textContent = data.error || 'Errore durante la registrazione.';
+            messageBox.style.color = 'red';
+        }
+    })
+    .catch(() => {
+        messageBox.textContent = 'Errore di connessione al server.';
+        messageBox.style.color = 'red';
+    });
+});
+    </script>
+</body>
+</html>

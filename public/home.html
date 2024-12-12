@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Feelings</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color:linear-gradient(to right, #fa709a, #fee140);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(to right, rgb(250, 112, 154), rgb(254, 225, 64));
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .menu .hamburger {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 25px;
+            background: linear-gradient(to right, rgb(250, 112, 154), rgb(254, 225, 64));
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .hamburger:hover .dropdown,
+        .hamburger .dropdown:hover {
+            display: block;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 20px;
+            text-decoration: none;
+            color: white;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .dropdown a:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .content {
+            width: 600px;
+            background: transparent;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .form-box {
+            margin-bottom: 20px;
+            background: transparent;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            font-weight: bold;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        
+        .btn {
+            background: linear-gradient(to right, #fa709a, #fee140);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 100%; 
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #fa709a, #fee140);
+            z-index: 0;
+            transition: right 1s ease-in-out; 
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn.loading:after {
+            right: 0; 
+        }
+
+        .btn.loading {
+            color: white;
+        }
+
+        .posts-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card {
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+        .card .info {
+            flex: 1;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            background: linear-gradient(to right, #fa709a, #fee140); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-weight: bold; 
+        }
+
+        .card small {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .card p {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .reactions img {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+        }
+        .animate {
+            transition: all 0.3s ease;
+            transform: scale(1.05); 
+        }
+
+        .like-btn.liked {
+    color: #ff4500;
+    font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <a href="/home.html" class="logo">F</a>
+        <div class="menu">
+            <div class="hamburger">
+                <span class="username logo"></span>
+                <div class="dropdown">
+                    <a href="/friends.html">Amici</a>
+                    <a href="/login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main-container">
+        <div class="content">
+            <div class="form-box">
+                <h2>Scrivi</h2>
+                <form id="postForm">
+                    <div class="input-group">
+                        <input type="text" name="sentimento"  placeholder="Come va?" required>
+                    </div>
+                    <div class="input-group">
+                        <strong><textarea name="note" placeholder="Racconta un po'" required></textarea></strong>
+                    </div>
+                    <button type="submit" class="btn"><span>Pubblica</span></button>
+                </form>
+            </div>
+            <div class="posts-container" id="postsContainer"></div>
+        </div>
+    </main>
+    <script>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+
+
+const usernameSpan = document.querySelector('.username');
+const username = localStorage.getItem('username');
+usernameSpan.textContent = username;
+
+const postsContainer = document.getElementById('postsContainer');
+const postForm = document.getElementById('postForm');
+const submitButton = postForm.querySelector('.btn');
+const userId = localStorage.getItem('user_id');
+
+
+function loadPosts() {
+    fetch(`/posts?userId=${userId}`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('Errore nel caricamento dei post');
+        return res.json();
+    })
+    .then(posts => {
+        postsContainer.innerHTML = posts.map(post => `
+            <div class="card">
+                <div class="info">
+                    <h3>${post.username}</h3>
+                    <small>${new Date(post.created_at).toLocaleString()}</small>
+                    <p>Mi sento: ${post.sentimento}</p>
+                    <p>Ti spiego: ${post.note}</p>
+                    <p>Mi piace: ${post.reazioni || 0}</p>
+                </div>
+                            <button class="like-btn ${post.is_liked ? 'liked' : ''}" data-id="${post.id}">
+                ${post.is_liked ? '👎 Non mi piace' : '👍 Mi piace'}
+                </button>
+                ${post.is_owner ? `<button class="delete-btn" data-id="${post.id}">🗑️ Elimina</button>` : ''}
+            </div>
+        `).join('');
+        setTimeout(() => {
+            document.querySelectorAll('.card').forEach(card => card.classList.add('loaded'));
+        }, 100);
+    })
+    .catch(err => {
+        console.error('Errore nel caricamento dei post:', err);
+    });
+}
+
+
+postsContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('like-btn')) {
+        const postId = e.target.getAttribute('data-id');
+        const isLiked = e.target.classList.contains('liked');
+        const action = isLiked ? 'unlike' : 'like';
+
+        fetch(`/posts/${postId}/reazioni`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+
+                e.target.classList.toggle('liked');
+                e.target.textContent = e.target.classList.contains('liked') ? '👎 Non mi piace' : '👍 Mi piace';
+                e.target.closest('.card').querySelector('.info p:last-child').textContent = `Mi piace: ${data.reazioni}`;;
+                
+            }
+        })
+        .catch(err => console.error('Errore nella gestione del "mi piace":', err));
+    }
+});
+
+
+postsContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete-btn')) {
+        const postId = e.target.getAttribute('data-id');
+
+        fetch(`/posts/${postId}?userId=${localStorage.getItem('user_id')}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                e.target.closest('.card').remove();
+            }
+        })
+        .catch(err => console.error('Errore nella cancellazione del post:', err));
+    }
+});
+
+
+postForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitButton.classList.add('loading');
+
+    const formData = new FormData(postForm);
+    fetch('/posts', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+            id_user: userId,
+            sentimento: formData.get('sentimento'),
+            note: formData.get('note')
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Errore nella creazione del post');
+        return response.json();
+    })
+    .then(() => {
+        setTimeout(() => {
+            submitButton.classList.remove('loading');
+            postForm.reset();
+            loadPosts();
+        }, 1000);
+    })
+    .catch(err => {
+        submitButton.classList.remove('loading');
+        console.error('Errore durante la creazione del post:', err);
+    });
+});
+
+
+loadPosts();
+});
+    </script>
+</body>
+</html>

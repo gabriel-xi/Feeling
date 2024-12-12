@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Feelings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h2>Benvenuto in Feelings</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div id="error-message"></div>
+                <button type="submit" class="btn dynamic-shadow">Accedi</button>
+            </form>
+            <p>Non hai un account? <a href="/registrazione.html">Registrati</a></p>
+        </div>
+    </div>
+
+    <script>
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const errorMessageDiv = document.getElementById('error-message');
+    errorMessageDiv.textContent = ''; // Resetta il messaggio di errore
+
+    fetch('/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email: formData.get('email'),
+            password: formData.get('password')
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.user) {
+            // Salva i dati utente nel localStorage
+            localStorage.setItem('username', data.user.nome);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            localStorage.setItem('user_id', data.user.id);
+            window.location.href = '/home.html';
+        } else {
+            errorMessageDiv.textContent = data.error || 'Errore durante il login.';
+            errorMessageDiv.style.color = 'red';
+        }
+    })
+    .catch(err => {
+        errorMessageDiv.textContent = 'Errore di connessione al server.';
+        errorMessageDiv.style.color = 'red';
+    });
+});
+    </script>
+</body>

@@ -1,7 +1,5 @@
 
-
-[Uploading logo-primario.html…]()
-
+<img width="1250" alt="Logo+UniCT" src="https://github.com/user-attachments/assets/1543d6ac-f394-406b-a874-2c651273e2dd" />
 
 Progetto d’Esame di Basi di Dati
 
